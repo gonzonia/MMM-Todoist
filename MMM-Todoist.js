@@ -80,7 +80,9 @@ Module.register("MMM-Todoist", {
 			46:'#ff8d85',
 			47:'#808080',
 			48:'#b8b8b8',
-			49:'#ccac93'
+			49:'#ccac93',
+			'grape':'purple',
+			'red':'red'
 		},
 
 		//This has been designed to use the Todoist Sync API.
@@ -336,9 +338,9 @@ Module.register("MMM-Todoist", {
 
 		//**** FOR DEBUGGING TO HELP PEOPLE GET THEIR PROJECT IDs */
 		if (self.config.debug) {
-			console.log("%c *** PROJECT -- ID ***", "background: #222; color: #bada55");
+			Log.log("%c *** PROJECT -- ID ***", "background: #222; color: #bada55");
 			tasks.projects.forEach(project => {
-				console.log("%c" + project.name + " -- " + project.id, "background: #222; color: #bada55");
+				Log.log("%c" + project.name + " -- " + project.id + "--" + project.color, "background: #222; color: #bada55");
 			});
 		};
 		//****** */
@@ -581,7 +583,7 @@ Module.register("MMM-Todoist", {
 		var project = this.tasks.projects.find(p => p.id === item.project_id);
 		var projectcolor = this.config.projectColors[project.color];
 		var innerHTML = "<span class='projectcolor' style='color: " + projectcolor + "; background-color: " + projectcolor + "'></span>" + project.name;
-		return this.createCell("xsmall", innerHTML);
+		return this.createCell("xsmall cls" + item.project_id , innerHTML);
 	},
 	addAssigneeAvatorCell: function(item, collaboratorsMap) {	
 		var avatarImg = document.createElement("img");
